@@ -1,0 +1,8 @@
+name: Yolo
+main: io.github.KoenMulder.Yolo.Yolo
+version: 1.0
+commands:
+  yolo:
+    description: yolo
+  wild:
+    description: random location
