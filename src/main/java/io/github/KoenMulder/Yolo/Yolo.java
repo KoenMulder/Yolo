@@ -9,6 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
+import java.util.*;
+
 public final class Yolo extends JavaPlugin {
 	
 	public void onEnable(){
@@ -54,8 +56,28 @@ public final class Yolo extends JavaPlugin {
 			Location location = player.getLocation();
 			world.playEffect(location, Effect.SMOKE, 3000);
 			world.playSound(location, Sound.BLAZE_DEATH, 50, 3);
-			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2000, 5)); 
+			player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 2000, 5));
 			
+		}
+		else if (cmd.getName().equalsIgnoreCase("jazz")) {
+			World world = player.getWorld();
+			Location location = player.getLocation();
+			world.playEffect(location, Effect.ENDER_SIGNAL, 3000);
+			world.playSound(location, Sound.BLAZE_HIT, 50, 3);
+			world.playEffect(location, Effect.SMOKE, 3000, 500);
+			player.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, 2000, 5));
+			world.playEffect(location, Effect.MOBSPAWNER_FLAMES, 3000, 10);
+			
+		}
+		else if (cmd.getName().equalsIgnoreCase("lol")) {
+			List<PotionEffect> potions = new ArrayList<PotionEffect>();
+			
+			potions.add(new PotionEffect(PotionEffectType.HEALTH_BOOST, 2000, 5));
+			potions.add(new PotionEffect(PotionEffectType.REGENERATION, 2000, 5));
+			potions.add(new PotionEffect(PotionEffectType.FAST_DIGGING, 2000, 5));
+			potions.add(new PotionEffect(PotionEffectType.ABSORPTION, 2000, 5));
+			
+			player.addPotionEffects(potions);
 		}
 		return false;
 	}

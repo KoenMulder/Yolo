@@ -14,3 +14,7 @@ commands:
     description: prepare to die
   godspeed:
     description: can you handle the powers of the gods?
+  jazz:
+    description: lol, i got killed by megatron :P
+  lol:
+    description: gives you every potion with a positive effect.
