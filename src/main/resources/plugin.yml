@@ -6,3 +6,11 @@ commands:
     description: yolo
   wild:
     description: random location
+  ip:
+    description: ip 
+  hashtag:
+    description: instagram
+  deathwish:
+    description: prepare to die
+  godspeed:
+    description: can you handle the powers of the gods?
