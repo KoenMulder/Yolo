@@ -2,19 +2,45 @@ package io.github.KoenMulder.Yolo;
 
 import org.bukkit.*;
 
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.Listener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+
+import io.github.KoenMulder.Yolo.SwearUtils;
 
 import java.util.*;
 
-public final class Yolo extends JavaPlugin {
+public class Yolo extends JavaPlugin implements Listener {
 	
 	public void onEnable(){
+		getServer().getPluginManager().registerEvents(this, this);
 		getLogger().info("yolo plugin loaded :)");
+	}
+	
+	@EventHandler(priority = EventPriority.LOWEST)
+	public void onPlayerChat(AsyncPlayerChatEvent event) {
+		String msg = event.getMessage();
+		
+		for (String key: SwearUtils.swearwordMap.keySet()) {
+			if (msg.toLowerCase().contains(key)) {
+				getLogger().info("found " + key);
+				int index = msg.toLowerCase().indexOf(key);
+				String replacementWord = SwearUtils.swearwordMap.get(key)[0];
+				String newMsg = msg.replaceAll("\\b" + key + "\\b", replacementWord);
+				msg = newMsg;
+			}
+		}
+		getLogger().info(msg);
+		
+		event.setMessage(msg);
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
